@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Xin chào</h1>
+<p>
+    <span>Welcome, <span th:text="${#authentication.principal.username}"></span>!</span>
+    <span th:if="${#authentication.principal.authorities.contains('admin')}">
+            (Role: Admin)
+        </span>
+    <span th:if="${#authentication.principal.authorities.contains('employers')}">
+            (Role: Employers)
+        </span>
+    <span th:if="${#authentication.principal.authorities.contains('user')}">
+            (Role: User)
+        </span>
+</p>
+
+<div th:if="${#request.isUserInRole('user')}">
+    <a href="/logout">Logout</a>
+</div>
+
+<div th:if="${not #request.isUserInRole('user')}">
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+</div>
+
+<div th:if="${#request.isUserInRole('admin')}">
+    <a href="/admin">Admin</a>
+</div>
+<div th:if="${#request.isUserInRole('employers')}">
+    <a href="/employers">Admin</a>
+</div>
+</body>
+</html>
